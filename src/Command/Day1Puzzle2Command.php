@@ -29,7 +29,7 @@ class Day1Puzzle2Command extends Command
             foreach ($numbers as $y) {
                 foreach ($numbers as $z) {
                     if ($x + $y + $z == 2020 && $x <= $y && $y <= $z) {
-                        $io->success("The numbers are $x, $y and $z, the sum is ".($x*$y*$z));
+                        $io->success("The numbers are $x, $y and $z, the product is ".($x*$y*$z));
                     }
                 }
             }
