@@ -25,9 +25,9 @@ class Day1Puzzle1Command extends Command
         $io = new SymfonyStyle($input, $output);
 
         $numbers = explode("\n", file_get_contents(dirname(__DIR__)."../../input/day1.txt"));
-        foreach ($numbers as $x) {
-            foreach ($numbers as $y) {
-                if ($x + $y == 2020 && $x <= $y) {
+        foreach ($numbers as $i => $x) {
+            foreach ($numbers as $j => $y) {
+                if ($x + $y == 2020 && $i < $j) {
                     $io->success("The numbers are $x and $y, the product is ".($x*$y));
                 }
             }
