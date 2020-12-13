@@ -35,15 +35,9 @@ class Day13Puzzle2Command extends Command
             }
         }
 
-        $correct = [1];
-
-        $max = max(array_filter($busses, function($value) {return $value != "x";}));
-
+        $correct = [];
         $t = 100000000000000;
-        while (($t + $schedule[$max]) % $max != 0) {
-            $t++;
-        }
-
+        $denominator = 1;
         while (true) {
             $ok = true;
             foreach ($schedule as $bus => $offset) {
@@ -53,28 +47,18 @@ class Day13Puzzle2Command extends Command
                 } else {
                     if (!in_array($bus, $correct)) {
                         $correct[] = $bus;
+                        $denominator *= $bus;
                     }
                 }
             }
             if ($ok) {
                 break;
             }
-            $t += $this->getDenominator($correct);
-            
+            $t += $denominator;
         }
 
         $io->success("The timestamp t is $t");
 
         return Command::SUCCESS;
-    }
-
-    private function getDenominator($values)
-    {
-        $result = 1;
-        foreach ($values as $value) {
-            $result *= $value;
-        }
-
-        return $result;
     }
 }
