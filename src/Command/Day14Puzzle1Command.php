@@ -54,16 +54,10 @@ class Day14Puzzle1Command extends Command
         $result = [];
 
         for ($i = 0; $i < 36; $i++) {
-            switch ($mask[$i]) {
-                case '0':
-                    $result[$i] = 0;
-                    break;
-                case '1':
-                    $result[$i] = 1;
-                    break;
-                case 'X':
-                    $result[$i] = $value[$i];
-                    break;
+            if ($mask[$i] == 'X') {
+                $result[$i] = $value[$i];
+            } else {
+                $result[$i] = $mask[$i];
             }
         }
 
