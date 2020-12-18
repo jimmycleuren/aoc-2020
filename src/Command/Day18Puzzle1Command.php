@@ -55,7 +55,6 @@ class Day18Puzzle1Command extends Command
 
         while (preg_match_all("/\(([\d\s\+\*]+)\)/", $input, $matches)) {
             foreach($matches[1] as $match) {
-                $this->logger->info("Solving " . $match);
                 $input = str_replace('('.$match.')', $this->calculate($match), $input);
             }
         }

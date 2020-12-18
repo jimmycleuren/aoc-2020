@@ -61,7 +61,7 @@ class Day18Puzzle2Command extends Command
 
         while (preg_match_all("/(\d+) \+ (\d+)/", $input, $matches)) {
             foreach($matches[0] as $key => $match) {
-                $input = str_replace($match, $this->eval($matches[1][$key], $matches[2][$key], '+'), $input);
+                $input = str_replace($match, $matches[1][$key] + $matches[2][$key], $input);
             }
         }
 
@@ -72,34 +72,17 @@ class Day18Puzzle2Command extends Command
             switch ($value) {
                 case '+':
                 case '*':
-                    $operation = $value;
                     break;
                 default:
                     if ($result === null) {
                         $result = $value;
                     } else {
-                        $result = $this->eval($result, $value, $operation);
+                        $result *= $value;
                     }
                     break;
             }
         }
 
         return $result;
-    }
-
-    private function eval($arg1, $arg2, $operation)
-    {
-        switch ($operation) {
-            case '+';
-                $arg1 += $arg2;
-                break;
-            case '*':
-                $arg1 *= $arg2;
-                break;
-            default:
-                $this->logger->critical("No operation set");
-        }
-
-        return $arg1;
     }
 }
